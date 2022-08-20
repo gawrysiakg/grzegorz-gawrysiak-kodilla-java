@@ -3,6 +3,9 @@ import com.kodilla.stream.beautifier.PoemBeautifier;
 import com.kodilla.stream.beautifier.PoemDecorator;
 import com.kodilla.stream.book.Book;
 import com.kodilla.stream.book.BookDirectory;
+
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import com.kodilla.stream.iterate.NumbersGenerator;
 import com.kodilla.stream.lambda.ExpressionExecutor;
@@ -21,7 +24,7 @@ public class StreamMain {
 
         Map<Integer, ForumUser> theResultMapOfForumUsers = forum.getUserList().stream()
                 .filter(forumUser->forumUser.getSex()=='M')
-                .filter(forumUser -> forumUser.getBirthDate().getYear()<=2002)
+                .filter(forumUser -> ChronoUnit.YEARS.between(forumUser.getBirthDate(), LocalDate.now()) >= 20)
                 .filter(forumUser -> forumUser.getNumberOfPosts()>=1)
                 .collect(Collectors.toMap(ForumUser::getUserID, forumUser -> forumUser));
 
