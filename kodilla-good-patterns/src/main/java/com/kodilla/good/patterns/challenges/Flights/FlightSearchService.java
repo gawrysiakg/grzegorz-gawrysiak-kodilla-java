@@ -1,10 +1,10 @@
 package com.kodilla.good.patterns.challenges.Flights;
 
-import com.sun.source.tree.IfTree;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class FlightSearchService {
 
@@ -15,49 +15,34 @@ public class FlightSearchService {
     }
 
 
-public void searchFlightFromTo(String from, String to) {
-    System.out.println("\u001B[34m"+"\nAll flights from "+from+" to "+to+":"+"\u001B[0m");
+    public Set<Flight> searchFlightFromTo(String from, String to) {
+
         Set<Flight> result = listOfFlights.stream()
                 .filter(flight -> flight.getDepartureAirport().equals(from))
                 .filter(flight -> flight.getArrivalAirport().equals(to))
                 .collect(Collectors.toSet());
-        if(result.size()>0){
-            result.stream().forEach(System.out::println);
-        } else {
-            System.out.println("Not found any flight");
-        }
+        return result;
+    }
 
-}
-
-    public void searchAllFlightsFrom(String from) {
-        System.out.println("\u001B[34m"+"\nAll flights from "+from+":"+"\u001B[0m");
+    public Set<Flight> searchAllFlightsFrom(String from) {
 
         Set<Flight> result = listOfFlights.stream()
                 .filter(flight -> flight.getDepartureAirport().equals(from))
                 .collect(Collectors.toSet());
-        if(result.size()>0){
-            result.stream().forEach(System.out::println);
-        } else {
-            System.out.println("Not found any flight");
-        }
+        return result;
     }
 
 
-    public void searchAllFlightsTo(String to) {
-        System.out.println("\u001B[34m"+"\nAll flights to "+to+":"+"\u001B[0m");
+    public Set<Flight> searchAllFlightsTo(String to) {
 
         Set<Flight> result = listOfFlights.stream()
                 .filter(flight -> flight.getArrivalAirport().equals(to))
                 .collect(Collectors.toSet());
-        if(result.size()>0){
-            result.stream().forEach(System.out::println);
-        } else {
-            System.out.println("Not found any flight");
-        }
+        return result;
     }
 
 
-    public void searchFlightViaOtherCity(String from, String to) {
+    public List<Flight> searchFlightViaOtherCity(String from, String to) {
 
         Set<Flight> flightsFrom = listOfFlights.stream()
                 .filter(flight -> flight.getDepartureAirport().equals(from))
@@ -67,24 +52,32 @@ public void searchFlightFromTo(String from, String to) {
                 .filter(flight -> flight.getArrivalAirport().equals(to))
                 .collect(Collectors.toSet());
 
-        int foundVia=0;
+        List<Flight> viaCity = new ArrayList<>();
         for (Flight f : flightsFrom){
             for (Flight t : flightsTo){
                 if (f.getArrivalAirport().equals(t.getDepartureAirport())){
-                    System.out.println("\u001B[34m"+"\nFlight form "+f.getDepartureAirport()+" to "
-                            +t.getArrivalAirport()+" with stopover in "+t.getDepartureAirport()+":"+"\u001B[0m");
-                    System.out.println(f);
-                    System.out.println(t);
-                    foundVia++;
+                 viaCity.add(f);
+                 viaCity.add(t);
                 }
             }
-        }
-        if(foundVia==0){
-            System.out.println("\nFlight from "+from+" to "+to+" not found");
-        }
+        } return viaCity;
     }
 
+    public Set <Flight> searchFlightViaOtherCity(String from, String to, String via) {
 
+        Set<Flight> flightsFromVia = listOfFlights.stream()
+                .filter(flight -> flight.getDepartureAirport().equals(from))
+                .filter(flight -> flight.getArrivalAirport().equals(via))
+                .collect(Collectors.toSet());
+
+        Set<Flight> flightsViaTo = listOfFlights.stream()
+                .filter(flight -> flight.getDepartureAirport().equals(via))
+                .filter(flight -> flight.getArrivalAirport().equals(to))
+                .collect(Collectors.toSet());
+
+        return Stream.concat(flightsFromVia.stream(), flightsViaTo.stream())
+                .collect(Collectors.toSet());
+    }
 
 
 

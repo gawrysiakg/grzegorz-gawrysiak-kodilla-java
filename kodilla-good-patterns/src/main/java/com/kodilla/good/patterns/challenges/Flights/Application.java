@@ -1,5 +1,8 @@
 package com.kodilla.good.patterns.challenges.Flights;
 
+import java.util.List;
+import java.util.Set;
+
 public class Application {
     public static void main(String[] args) {
 
@@ -8,13 +11,20 @@ public class Application {
         FlightSearchService flightSearchService = new FlightSearchService(flightsDatabase.getListOfFlights());
 
 
-        flightSearchService.searchFlightFromTo("WARSZAWA", "GDANSK");
+        Set<Flight> fromTo = flightSearchService.searchFlightFromTo("WARSZAWA", "GDANSK");
+        System.out.println(fromTo);
 
-        flightSearchService.searchAllFlightsFrom("WARSZAWA");
+        Set<Flight> flightFrom = flightSearchService.searchAllFlightsFrom("WARSZAWA");
+        System.out.println(flightFrom);
 
-        flightSearchService.searchAllFlightsTo("GDANSK");
+        Set<Flight> flightTo = flightSearchService.searchAllFlightsTo("GDANSK");
+        System.out.println(flightTo);
 
-        flightSearchService.searchFlightViaOtherCity("WARSZAWA", "GDANSK");
 
+        List<Flight> flightVia = flightSearchService.searchFlightViaOtherCity("WARSZAWA", "GDANSK");
+        System.out.println(flightVia);
+
+        Set<Flight> flightFromToVia = flightSearchService.searchFlightViaOtherCity("WARSZAWA", "GDANSK", "WROCLAW");
+        System.out.println(flightFromToVia);
     }
 }

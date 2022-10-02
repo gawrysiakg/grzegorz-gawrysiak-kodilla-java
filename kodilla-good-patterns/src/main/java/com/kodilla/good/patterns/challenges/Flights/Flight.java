@@ -30,9 +30,9 @@ public class Flight {
     @Override
     public String toString() {
         return "Flight " +
-                "From: '" + departureAirport + '\'' +
-                ", To: '" + arrivalAirport + '\'' +
-                ", Flight number: " + flightNumber;
+                "from: '" + departureAirport +
+                ", to: '" + arrivalAirport +
+                ", flight number: " + flightNumber+"\n";
     }
 
     @Override

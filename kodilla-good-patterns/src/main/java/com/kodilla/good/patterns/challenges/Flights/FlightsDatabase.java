@@ -56,4 +56,5 @@ public class FlightsDatabase {
                 "listOfFlights=" + listOfFlights +
                 '}';
     }
+
 }
