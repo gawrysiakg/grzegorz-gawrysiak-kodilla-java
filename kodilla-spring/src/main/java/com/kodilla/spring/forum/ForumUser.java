@@ -6,9 +6,11 @@ import org.springframework.stereotype.Component;
 public class ForumUser {
     private String username;
 
+
     public ForumUser() {
         this.username = "John Smith";
     }
+
 
     public String getUsername() {
         return username;
