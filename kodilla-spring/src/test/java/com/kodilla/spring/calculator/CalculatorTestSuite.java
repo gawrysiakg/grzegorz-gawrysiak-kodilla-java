@@ -1,23 +1,59 @@
 package com.kodilla.spring.calculator;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 @SpringBootTest
 public class CalculatorTestSuite {
 
-    @Autowired
-    private Calculator calculator;
+    @Test
+    public void addTest() {
+        //Given
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Calculator calculator = context.getBean(Calculator.class);
+        //When
+        double a = 5.5, b = 4.5;
+        double result = calculator.add(a,b);
+        //Then
+        Assertions.assertEquals(10.0, result,0.1);
+    }
 
     @Test
-    void testCalculations(){
+    public void subTest() {
         //Given
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Calculator calculator = context.getBean(Calculator.class);
         //When
-        calculator.add(5.25, 13.5);
-        calculator.sub(155.001,49.99);
-        calculator.mul(20.00, 3.00);
-        calculator.div(100.00, 2.50);
+        double a = 5.5, b = 4.5;
+        double result = calculator.sub(a,b);
         //Then
+        Assertions.assertEquals(1.0, result,0.1);
+    }
+
+    @Test
+    public void mulTest() {
+        //Given
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Calculator calculator = context.getBean(Calculator.class);
+        //When
+        double a = 5.5, b = 4.5;
+        double result = calculator.mul(a,b);
+        //Then
+        Assertions.assertEquals(24.75, result,0.1);
+    }
+
+    @Test
+    public void divTest() {
+        //Given
+        ApplicationContext context = new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Calculator calculator = context.getBean(Calculator.class);
+        //When
+        double a = 9, b = 4.5;
+        double result = calculator.div(a,b);
+        //Then
+        Assertions.assertEquals(2.0, result,0.1);
     }
 }

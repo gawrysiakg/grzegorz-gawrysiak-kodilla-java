@@ -11,15 +11,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class LibraryTestSuite {
-    @Autowired
-    Library library;
+//    @Autowired
+//    Library library;
 
     @Test
     void testLoadFromDb() {
         //Given
-//        ApplicationContext context =
-//                new AnnotationConfigApplicationContext("com.kodilla.spring");
-//        Library library = context.getBean(Library.class);
+        ApplicationContext context =
+                new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Library library = context.getBean(Library.class);
 
         //When
         library.loadFromDb();
@@ -31,9 +31,9 @@ class LibraryTestSuite {
     @Test
     void testSaveToDb() {
         //Given
-//        ApplicationContext context =
-//                new AnnotationConfigApplicationContext("com.kodilla.spring");
-//        Library library = context.getBean(Library.class);
+        ApplicationContext context =
+                new AnnotationConfigApplicationContext("com.kodilla.spring");
+        Library library = context.getBean(Library.class);
 
         //When
         library.saveToDb();
