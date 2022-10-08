@@ -22,7 +22,10 @@ public class BoardTestSuite {
 
         //When
         toDoList.addTaskToTheList("First task");
+        toDoList.addTaskToTheList("Second task");
+
         inProgressList.addTaskToTheList("First task in progress");
+
         doneList.addTaskToTheList("First done task");
 
         String toDoTask = toDoList.getTaskFromTheList(0);
@@ -31,7 +34,7 @@ public class BoardTestSuite {
 
         //Then
         Assertions.assertEquals("First task", toDoTask);
-        Assertions.assertEquals(1, toDoList.getTasks().size());
+        Assertions.assertEquals(2, toDoList.getTasks().size());
 
         Assertions.assertEquals("First task in progress", inProgressTask);
         Assertions.assertEquals(1, inProgressList.getTasks().size());
