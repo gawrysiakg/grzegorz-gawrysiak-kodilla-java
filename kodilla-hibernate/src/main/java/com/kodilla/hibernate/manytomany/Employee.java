@@ -6,6 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @NamedQuery(
+        name = "Employee.findEmployeeByPartOfTheLastname",
+        query = "FROM Employee WHERE lastname LIKE CONCAT('%', :ARG, '%')"
+)
+@NamedQuery(
         name = "Employee.retrieveEmployeesWithGivenLastname",
         query = "FROM Employee WHERE lastname LIKE :LASTNAME"
 )

@@ -1,14 +1,14 @@
 package com.kodilla.hibernate.manytomany;
 
-import antlr.collections.impl.LList;
-import com.kodilla.hibernate.task.Task;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@NamedQuery(
+        name = "Company.findCompanyByPartOfTheName",
+        query = "FROM Company WHERE name LIKE CONCAT('%', :ARG, '%')"
+)
 @NamedNativeQuery(
         name = "Company.retrieveCompaniesWithGivenPartName",
         query = "SELECT * FROM COMPANIES" +
